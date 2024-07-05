@@ -7,13 +7,16 @@ export default async function handler(request) {
         const newResponse = new Response(response.body, response);
         console.log("response")
         console.log(response)
-    // Add a custom header with a value
-    newResponse.headers.append(
-      "X-Robots-Tag",
-      "noindex"
-    );
+      // Add a custom header with a value
+      newResponse.headers.append(
+        "X-Robots-Tag",
+        "noindex"
+      );
 
-    return newResponse;
+      console.log("newResponse");
+      console.log(newResponse);
+
+      return newResponse;
       }
     
       if (hostname === 'domain-number-2.contentstackapps.com') {
