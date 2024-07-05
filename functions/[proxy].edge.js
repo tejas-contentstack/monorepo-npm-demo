@@ -4,7 +4,7 @@ export default async function handler(request) {
     if (hostname === 'monorepo-npm-demo.contentstackapps.com' ) {
         const response = await fetch(request)
         const newHeaders = new Headers(response.headers)
-        newHeaders.set('X-Robots-Tag', 'noindex')
+        newHeaders.append('X-Robots-Tag', 'noindex')
         console.log("response")
         console.log(response)
         return new Response(response.body, {
