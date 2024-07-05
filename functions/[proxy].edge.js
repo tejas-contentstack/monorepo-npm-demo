@@ -14,7 +14,7 @@ export default async function handler(request) {
       );
 
       console.log("newResponse");
-      console.log(newResponse);
+      console.log(JSON.stringify(newResponse));
 
       return newResponse;
       }
