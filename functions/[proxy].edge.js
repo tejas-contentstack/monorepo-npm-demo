@@ -3,15 +3,17 @@ export default async function handler(request) {
     const hostname = url.hostname
     if (hostname === 'monorepo-npm-demo.contentstackapps.com' ) {
         const response = await fetch(request)
-        const newHeaders = new Headers(response.headers)
-        newHeaders.append('X-Robots-Tag', 'noindex')
+        
+        const newResponse = new Response(response.body, response);
         console.log("response")
         console.log(response)
-        return new Response(response.body, {
-            status: response.status,
-            statusText: response.statusText,
-            headers: newHeaders
-        });
+    // Add a custom header with a value
+    newResponse.headers.append(
+      "X-Robots-Tag",
+      "noindex"
+    );
+
+    return newResponse;
       }
     
       if (hostname === 'domain-number-2.contentstackapps.com') {
