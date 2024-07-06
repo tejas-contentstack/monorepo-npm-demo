@@ -9,19 +9,15 @@ export default async function handler(request) {
        */
       const originalResponse = await fetch(request);
   
-      let response = new Response(originalResponse.body, {
+      const response = new Response(originalResponse.body, {
         status: originalResponse.status,
         statusText: originalResponse.statusText,
-        headers: originalResponse.headers,
+        headers: originalResponse.headers.clone(), // Clone headers for modification
       });
   
-      response = new Response(originalResponse.body, response);
-  
-      // Add a header using set method
       response.headers.set("X-Robots-Tag", "noindex");
   
-  
-      return response;
+      return response; // Explicitly return the modified response
     }
   
     if (hostname === 'domain-number-2.contentstackapps.com') {
