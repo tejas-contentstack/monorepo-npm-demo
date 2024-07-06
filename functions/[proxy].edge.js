@@ -19,6 +19,7 @@ export default async function handler(request) {
       //   statusText: originalResponse.statusText,
       // });
     let response;
+    return await fetch(request);
     try {
       response = await fetch(request)
   
