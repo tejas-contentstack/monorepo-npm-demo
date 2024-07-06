@@ -4,17 +4,15 @@ export default async function handler(request) {
     if (hostname === 'monorepo-npm-demo.contentstackapps.com' ) {
         const response = await fetch(request)
         
-        const newResponse = new Response(response.body, response);
+        const newResponse = response.clone();
         console.log("response")
-        console.log(response)
+        console.log(response?.body)
+        console.log(response?.status)
       // Add a custom header with a value
       newResponse.headers.append(
         "X-Robots-Tag",
         "noindex"
       );
-
-      console.log("newResponse");
-      console.log(JSON.stringify(newResponse));
 
       return newResponse;
       }
