@@ -12,7 +12,7 @@ export default async function handler(request) {
       const response = new Response(originalResponse.body, {
         status: originalResponse.status,
         statusText: originalResponse.statusText,
-        headers: originalResponse.headers.clone(), // Clone headers for modification
+        headers: originalResponse.headers, // Clone headers for modification
       });
   
       response.headers.set("X-Robots-Tag", "noindex");
