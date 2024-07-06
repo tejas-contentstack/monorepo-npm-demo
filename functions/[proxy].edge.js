@@ -9,8 +9,8 @@ export default async function handler(request) {
        */
       const originalResponse = await fetch(request);
       const responseHeaderEntries = originalResponse.headers.entries()
-      let responseHeaders = new Headers(responseHeaderEntries)
-      responseHeaders.headers.append("X-Robots-Tag", "noindex");
+      let responseHeaders = new Headers(responseHeaderEntries);
+      responseHeaders.set("X-Robots-Tag", "noindex");
       
       const response = new Response(originalResponse.body, {
         ...originalResponse,
@@ -25,3 +25,10 @@ export default async function handler(request) {
   console.log('Edge log identifier: contentfly-management-background-jobs-service-dev-deploy:1ff7e98cc1b0-1b0f3dc9d82f:run-counter-1')
   return fetch(request);
 }
+
+const request = new Request({
+  method: "GET",
+  url: "monorepo-npm-demo.contentstackapps.com"
+})
+
+const response = await handler(request);
