@@ -9,14 +9,9 @@ export default async function handler(request) {
        */
       const originalResponse = await fetch(request);
       const responseHeaders = new Headers(originalResponse.headers)
-      responseHeaders.set("X-Robots-Tag", "noindex");
   
-      const response = new Response(originalResponse.body, {
-        status: originalResponse.status,
-        statusText: originalResponse.statusText,
-        headers: responseHeaders, // Clone headers for modification
-      });
-  
+      const response = new Response(originalResponse.body, {...originalResponse});
+      response.headers.set("X-Robots-Tag", "noindex");
   
       return response; // Explicitly return the modified response
     }
