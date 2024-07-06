@@ -14,7 +14,9 @@ export default async function handler(request) {
       
       const response = new Response(originalResponse.body, {
         ...originalResponse,
-        headers: responseHeaders
+        headers: responseHeaders,
+        status: originalResponse.statusCode,
+        statusText: originalResponse.statusText,
       });
       return response; // Explicitly return the modified response
     }
