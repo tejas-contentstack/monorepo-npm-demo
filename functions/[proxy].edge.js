@@ -18,6 +18,7 @@ export default async function handler(request) {
         status: originalResponse.statusCode,
         statusText: originalResponse.statusText,
       });
+      console.log('reaching here without an error message')
       return response; // Explicitly return the modified response
     }
   
