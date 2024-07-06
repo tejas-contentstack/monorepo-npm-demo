@@ -8,14 +8,15 @@ export default async function handler(request) {
        * object. Response headers can be modified through the headers `set` method.
        */
       const originalResponse = await fetch(request);
+      const responseHeaders = new Headers(originalResponse.headers)
+      responseHeaders.set("X-Robots-Tag", "noindex");
   
       const response = new Response(originalResponse.body, {
         status: originalResponse.status,
         statusText: originalResponse.statusText,
-        headers: originalResponse.headers, // Clone headers for modification
+        headers: responseHeaders, // Clone headers for modification
       });
   
-      response.headers.set("X-Robots-Tag", "noindex");
   
       return response; // Explicitly return the modified response
     }
