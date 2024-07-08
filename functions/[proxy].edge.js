@@ -5,6 +5,7 @@ export default async function handler(request, context) {
   if (hostname === 'monorepo-npm-demo.contentstackapps.com') {
     const response = await fetch(request);
     console.log("before responseBody")
+    console.log(response.body);
     const modifiedResponse =  new Response(response.body, response)
     console.log("post modifiedResponse");
 
