@@ -10,7 +10,7 @@ export default async function handler(request, context) {
     })
     console.log("post modifiedResponse");
 
-    modifiedResponse.headers.append("X-Robots-Tag", "noindex");
+    // modifiedResponse.headers.append("X-Robots-Tag", "noindex");
     
     return modifiedResponse;
     // try {
