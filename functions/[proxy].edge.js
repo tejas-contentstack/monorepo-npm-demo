@@ -1,23 +1,30 @@
-export default async function handler(request) {
+export default async function handler(request, context) {
   const url = new URL(request.url);
   const hostname = url.hostname;
 
   if (hostname === 'monorepo-npm-demo.contentstackapps.com') {
-    try {
-      const response = await fetch(request);
+    const response = await fetch(requestWithModifiedUrl);
+    const responseBody = await response.json();
+    const modifiedResponse = new Response(JSON.stringify({
+      ...responseBody,
+    }), response)
+    modifiedResponse.headers.set("X-Robots-Tag", "noindex")
+    return modifiedResponse;
+    // try {
+    //   const response = await fetch(request);
 
-      // Clone the response for modification
-      const newResponse = new Response(response.body, response);
+    //   // Clone the response for modification
+    //   const newResponse = new Response(response.body, response);
 
-      // Add a custom header with a value
-      newResponse.headers.append("X-Robots-Tag", "noindex");
+    //   // Add a custom header with a value
+    //   newResponse.headers.append("X-Robots-Tag", "noindex");
 
-      return newResponse;
-    } catch (error) {
-      console.log('Error fetching response:', error);
-      // Handle the error here (e.g., return a generic error response)
-      return new Response('An error occurred.', { status: 500 });
-    }
+    //   return newResponse;
+    // } catch (error) {
+    //   console.log('Error fetching response:', error);
+    //   // Handle the error here (e.g., return a generic error response)
+    //   return new Response('An error occurred.', { status: 500 });
+    // }
   }
 
   if (hostname === 'domain-number-2.contentstackapps.com') {
