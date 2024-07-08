@@ -5,13 +5,13 @@ export default async function handler(request, context) {
   if (hostname === 'monorepo-npm-demo.contentstackapps.com') {
     const response = await fetch(request);
     console.log("before responseBody")
-    const modifiedResponse =  new Response(response.body)
-    console.log("post modifiedResponse")
+    const modifiedResponse =  new Response(response.body, {
+      headers: response.headers
+    })
+    console.log("post modifiedResponse");
 
-    modifiedResponse.headers = {
-      ...response.headers,
-      'X-Robots-Tag': 'noindex',
-    }
+    modifiedResponse.headers.append("X-Robots-Tag", "noindex");
+    
     return modifiedResponse;
     // try {
     //   const response = await fetch(request);
