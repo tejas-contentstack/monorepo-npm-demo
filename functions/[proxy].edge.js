@@ -3,7 +3,7 @@ export default async function handler(request, context) {
   const hostname = url.hostname;
 
   if (hostname === 'monorepo-npm-demo.contentstackapps.com') {
-    const response = await fetch(requestWithModifiedUrl);
+    const response = await fetch(request);
     const responseBody = await response.json();
     const modifiedResponse = new Response(JSON.stringify({
       ...responseBody,
