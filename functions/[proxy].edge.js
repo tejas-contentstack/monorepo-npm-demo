@@ -8,7 +8,10 @@ export default async function handler(request, context) {
     const modifiedResponse =  new Response(response.body)
     console.log("post modifiedResponse")
 
-    modifiedResponse.headers.set("X-Robots-Tag", "noindex")
+    modifiedResponse.headers = {
+      ...response.headers,
+      'X-Robots-Tag': 'noindex',
+    }
     return modifiedResponse;
     // try {
     //   const response = await fetch(request);
