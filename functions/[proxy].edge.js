@@ -5,9 +5,9 @@ export default async function handler(request, context) {
   if (hostname === 'monorepo-npm-demo.contentstackapps.com') {
     const response = await fetch(request);
     const responseBody = await response.json();
-    const modifiedResponse = new Response(JSON.stringify({
+    const modifiedResponse = new Response({
       ...responseBody,
-    }), response)
+    }, response)
     modifiedResponse.headers.set("X-Robots-Tag", "noindex")
     return modifiedResponse;
     // try {
